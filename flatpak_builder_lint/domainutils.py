@@ -107,6 +107,13 @@ def fetch_summary_bytes(url: str) -> bytes:
     except (OSError, FileNotFoundError) as e:
         logger.debug("Exception loading local summary file: %s: %s", type(e).__name__, e)
 
+    # The beta repo is optional and may not exist for every deployment.
+    # When neither the remote summary nor a bundled fallback is available,
+    # treat the beta repo as empty instead of failing hard.
+    if url.startswith(config.FLATHUB_BETA_REPO_URL):
+        logger.debug("Beta summary unavailable for %s; treating as empty", url)
+        return GLib.Variant("(a(s(taya{sv}))a{sv})", ([], {})).get_data_as_bytes().get_data()
+
     raise Exception("Failed to load fallback local summary file")
 
 

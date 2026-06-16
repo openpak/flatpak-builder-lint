@@ -63,7 +63,7 @@ def _build(
     ]
     if mirror_screenshots:
         cmd += [
-            "--mirror-screenshots-url=https://dl.flathub.org/media",
+            "--mirror-screenshots-url=https://dl.openpak.org/media",
             "--compose-url-policy=full",
         ]
     if extra_args:

@@ -151,7 +151,7 @@ jobs:
           cd tests/repo/min_success_metadata/gui-app
           dbus-run-session flatpak run org.flatpak.Builder//localtest --verbose --user --force-clean --repo=repo \
             --arch="$FP_ARCH" \
-            --mirror-screenshots-url=https://dl.flathub.org/media \
+            --mirror-screenshots-url=https://dl.openpak.org/media \
             --compose-url-policy=full \
             --install-deps-from=flathub --ccache builddir org.flathub.gui.yaml
           mkdir -p builddir/files/share/app-info/media

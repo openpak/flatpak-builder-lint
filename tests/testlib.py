@@ -109,7 +109,7 @@ def move_files(testdir: str) -> None:
     for path in paths.values():
         os.makedirs(path, exist_ok=True)
 
-    flathubjson = os.path.join(testdir, "flathub.json")
+    flathubjson = os.path.join(testdir, "openpak.json")
     if os.path.exists(flathubjson) and os.path.isfile(flathubjson):
         shutil.move(flathubjson, paths["flathubjson_path"])
 

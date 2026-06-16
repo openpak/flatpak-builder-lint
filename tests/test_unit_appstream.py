@@ -214,7 +214,7 @@ class TestAppstreamXml:
     def test_is_remote_icon_mirrored_true(self, tmp_path: Any) -> None:
         xml = """
             <component>
-              <icon type="remote">https://dl.flathub.org/media/foo.png</icon>
+              <icon type="remote">https://dl.openpak.org/media/foo.png</icon>
             </component>
         """
         p = _write_appstream(tmp_path, xml)

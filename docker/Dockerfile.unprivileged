@@ -1,4 +1,6 @@
-FROM ghcr.io/flathub-infra/flatpak-builder-lint:latest
+ARG GITHUB_REPOSITORY=flathub-infra/flatpak-builder-lint
+ARG VERSION=latest
+FROM ghcr.io/${GITHUB_REPOSITORY}:${VERSION}
 
 ADD passwd /etc/passwd
 RUN install -d -m755 -o 1001 -g 1001 /home/flatbld

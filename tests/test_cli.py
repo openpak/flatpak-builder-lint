@@ -87,9 +87,9 @@ class TestPrintGhAnnotations:
         assert "E:file.xml:tag:10 explanation" in out
 
     def test_notice_message(self) -> None:
-        out = self._capture({"message": "See https://docs.flathub.org/linter"})
+        out = self._capture({"message": "See https://docs.openpak.org/linter"})
         assert "::notice::" in out
-        assert "https://docs.flathub.org/linter" in out
+        assert "https://docs.openpak.org/linter" in out
 
     def test_omitted_annotation_is_skipped(self) -> None:
         out = self._capture({"errors": ["appstream-failed-validation"]})

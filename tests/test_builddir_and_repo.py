@@ -475,7 +475,7 @@ def test_home_host_access(check_type: str, tmp_testdir: str) -> None:
 
 def test_appstream_prerelease(check_type: str, tmp_testdir: str, monkeypatch: MonkeyPatch) -> None:
     testdir = "tests/builddir/appstream-prerelease"
-    monkeypatch.setenv("REPO", "https://github.com/flathub/flathub")
+    monkeypatch.setenv("REPO", "https://github.com/OpenPak/openpak")
     move_files(testdir)
     create_catalogue(testdir, "org.flathub.appstream_prerelease.xml")
 
