@@ -63,14 +63,14 @@ run_build() {
         dbus-run-session flatpak run org.flatpak.Builder//localtest \
             --verbose --user --force-clean \
             --state-dir="$GITHUB_WORKSPACE/cache/.flatpak-builder" --repo=repo \
-            --mirror-screenshots-url=https://dl.flathub.org/media \
+            --mirror-screenshots-url=https://dl.openpak.org/media \
             --compose-url-policy=full \
             --install-deps-from=flathub --ccache builddir \
             org.flathub.gui.yaml
     else
         flatpak run org.flatpak.Builder//localtest --verbose --user \
             --force-clean --repo=repo \
-            --mirror-screenshots-url=https://dl.flathub.org/media \
+            --mirror-screenshots-url=https://dl.openpak.org/media \
             --compose-url-policy=full \
             --install-deps-from=flathub --ccache builddir \
             org.flathub.gui.yaml
