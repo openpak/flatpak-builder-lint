@@ -252,7 +252,7 @@ def run_checks(
             if not results["info"]:
                 results.pop("info")
 
-    help_text = "See https://docs.flathub.org/linter for details and exceptions"
+    help_text = "See https://docs.openpak.org/linter for details and exceptions"
 
     if any(x in results for x in ("errors", "warnings", "info")):
         results["message"] = help_text

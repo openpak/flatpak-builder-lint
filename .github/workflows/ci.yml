@@ -277,6 +277,3 @@ jobs:
       - ci
     if: ${{ (github.event_name != 'pull_request' && github.ref == 'refs/heads/master') && (needs.changes.outputs.force_ci == 'true' || needs.changes.outputs.docker == 'true') }}
     uses: ./.github/workflows/docker.yml
-    secrets:
-      FLATHUB_ORG_USER: ${{ secrets.FLATHUB_ORG_USER }}
-      FLATHUB_ORG_TOKEN: ${{ secrets.FLATHUB_ORG_TOKEN }}

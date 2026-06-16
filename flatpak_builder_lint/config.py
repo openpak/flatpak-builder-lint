@@ -3,17 +3,17 @@ import os
 GITHUB_API = "https://api.github.com"
 GITHUB_CONTENT_CDN = "https://raw.githubusercontent.com"
 
-LINTER_FULL_REPO = "flathub-infra/flatpak-builder-lint"
+LINTER_FULL_REPO = "OpenPak/flatpak-builder-lint"
 
-FLATHUB_REPO_BASE_URL = "https://dl.flathub.org"
-FLATHUB_API_URL = "https://flathub.org/api/v2"
+FLATHUB_REPO_BASE_URL = "https://dl.openpak.org"
+FLATHUB_API_URL = "https://openpak.org/api/v2"
 FLATHUB_MEDIA_BASE_URL = f"{FLATHUB_REPO_BASE_URL}/media"
 FLATHUB_STABLE_REPO_URL = f"{FLATHUB_REPO_BASE_URL}/repo"
 FLATHUB_BETA_REPO_URL = f"{FLATHUB_REPO_BASE_URL}/beta-repo"
-FLATHUB_BUILD_BASE_URL = "https://hub.flathub.org"
+FLATHUB_BUILD_BASE_URL = "https://build.openpak.org"
 FLATHUB_BUILD_API_URL = f"{FLATHUB_BUILD_BASE_URL}/api/v1"
-FLATHUB_GITHUB_ORG_URL = "https://github.com/flathub/"
-FLATHUB_GITHUB_FLATHUB_REPO_URL = f"{FLATHUB_GITHUB_ORG_URL}flathub"
+FLATHUB_GITHUB_ORG_URL = "https://github.com/OpenPak/"
+FLATHUB_GITHUB_FLATHUB_REPO_URL = f"{FLATHUB_GITHUB_ORG_URL}openpak"
 
 FLATHUB_SUPPORTED_ARCHES = ("x86_64", "aarch64")
 
@@ -22,7 +22,7 @@ FLATHUB_RUNTIME_SUFFIXES = (".Platform", ".Sdk")
 
 IGNORE_REF_SUFFIXES = (".Locale", ".Debug", ".Sources")
 
-FLATHUB_JSON_FILE = "flathub.json"
+FLATHUB_JSON_FILE = "openpak.json"
 
 FLATHUB_BASEAPP_IDENTIFIER = ".BaseApp"
 
