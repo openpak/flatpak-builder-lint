@@ -15,7 +15,7 @@ jobs:
             platform: arm64
     runs-on: ${{matrix.os}}
     timeout-minutes: 180
-    if: github.repository == 'OpenPak/flatpak-builder-lint' && github.ref == 'refs/heads/master'
+    if: github.repository == 'openpak/flatpak-builder-lint' && github.ref == 'refs/heads/master'
     concurrency:
       group: ${{matrix.os}}-${{ github.ref }}-docker
       cancel-in-progress: true
@@ -53,7 +53,7 @@ jobs:
 
         # 6.0.2
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
-        if: github.repository == 'OpenPak/flatpak-builder-lint' && github.ref == 'refs/heads/master'
+        if: github.repository == 'openpak/flatpak-builder-lint' && github.ref == 'refs/heads/master'
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -185,7 +185,7 @@ jobs:
 
       # 5.0.5
       - uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae
-        if: github.repository == 'OpenPak/flatpak-builder-lint' && github.ref == 'refs/heads/master'
+        if: github.repository == 'openpak/flatpak-builder-lint' && github.ref == 'refs/heads/master'
         with:
           path: ${{ github.workspace }}/docker-cache/.flatpak-builder
           key: ${{ runner.os }}-${{ matrix.platform }}-docker-flatpak-builder-${{ hashFiles('docker/org.flatpak.Builder/org.flatpak.Builder-cache.json') }}

@@ -379,7 +379,7 @@ def test_manifest_modules(monkeypatch: MonkeyPatch) -> None:
     }
 
     # Source dir not allowed only in flathub context.
-    monkeypatch.setenv("REPO", "https://github.com/OpenPak/org.flatpak.Builder")
+    monkeypatch.setenv("REPO", "https://github.com/openpak/org.flatpak.Builder")
     ret = run_checks("tests/manifests/modules.json")
     found_errors = set(ret["errors"])
 
@@ -638,7 +638,7 @@ def test_manifest_json() -> None:
 
 
 def test_manifest_build_network_access(monkeypatch: MonkeyPatch) -> None:
-    monkeypatch.setenv("REPO", "https://github.com/OpenPak/org.flatpak.Builder")
+    monkeypatch.setenv("REPO", "https://github.com/openpak/org.flatpak.Builder")
     ret = run_checks("tests/manifests/network_access.json")
     found_errors = ret["errors"]
     errors = {

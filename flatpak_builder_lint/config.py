@@ -3,7 +3,7 @@ import os
 GITHUB_API = "https://api.github.com"
 GITHUB_CONTENT_CDN = "https://raw.githubusercontent.com"
 
-LINTER_FULL_REPO = "OpenPak/flatpak-builder-lint"
+LINTER_FULL_REPO = "openpak/flatpak-builder-lint"
 
 FLATHUB_REPO_BASE_URL = "https://dl.openpak.org"
 FLATHUB_API_URL = "https://openpak.org/api/v2"
