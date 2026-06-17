@@ -60,7 +60,7 @@ jobs:
 
       - name: Force full CI for schedule or manual runs
         if: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
-               && github.repository == 'flathub-infra/flatpak-builder-lint' }}
+               && github.repository == 'openpak/flatpak-builder-lint' }}
         id: force
         run: echo "value=true" >> $GITHUB_OUTPUT
 
@@ -263,7 +263,7 @@ jobs:
 
       # 5.0.5
       - uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae
-        if: github.repository == 'flathub-infra/flatpak-builder-lint' && github.ref == 'refs/heads/master'
+        if: github.repository == 'openpak/flatpak-builder-lint' && github.ref == 'refs/heads/master'
         with:
           path: ${{ github.workspace }}/cache/.flatpak-builder
           key: ${{ runner.os }}-${{ matrix.platform }}-ci-flatpak-builder-${{ hashFiles('build/org.flatpak.Builder/org.flatpak.Builder-cache.json') }}
