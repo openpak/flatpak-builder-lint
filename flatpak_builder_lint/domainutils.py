@@ -219,6 +219,22 @@ def get_active_runtimes_on_flathub() -> set[str]:
 
 
 @cache
+def fetch_image_bytes(url: str) -> bytes | None:
+    # Download a screenshot/image and return its raw bytes (None on any failure).
+    # Used to detect the same image being reused for multiple screenshots/captions.
+    if not url.startswith(("https://", "http://")):
+        return None
+    try:
+        r = session.get(url, allow_redirects=True, timeout=REQUEST_TIMEOUT)
+        if r.status_code == 200 and r.content:
+            return r.content
+        logger.debug("Image fetch non-200 for %s: %s", url, r.status_code)
+    except requests.exceptions.RequestException as e:
+        logger.debug("Image fetch failed %s: %s: %s", url, type(e).__name__, e)
+    return None
+
+
+@cache
 def check_url(url: str, strict: bool = False) -> tuple[bool, str | None]:
     if not url.startswith(("https://", "http://")):
         raise Exception("Invalid input")

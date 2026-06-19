@@ -1,8 +1,9 @@
 import glob
+import hashlib
 import os
 import tempfile
 
-from .. import appstream, builddir, config, ostree
+from .. import appstream, builddir, config, domainutils, ostree
 from . import Check
 
 
@@ -70,6 +71,30 @@ class ScreenshotsCheck(Check):
                 self.errors.add("metainfo-svg-screenshots")
                 self.info.add("metainfo-svg-screenshots: The metainfo has a SVG screenshot")
                 return
+
+            # Detect the same image reused for multiple screenshots/captions (an
+            # AI-generated-manifest tell that fakes a fuller gallery). Compare by
+            # content hash, not URL/filename: the same image is often copied under
+            # different filenames. Only flag when two or more images that download
+            # successfully are byte-identical, so network failures never false-flag.
+            http_sc = [u for u in metainfo_sc if u.startswith(("http://", "https://"))]
+            if len(http_sc) > 1:
+                hashes: dict[str, list[str]] = {}
+                for sc_url in http_sc:
+                    content = domainutils.fetch_image_bytes(sc_url)
+                    if content is None:
+                        continue
+                    digest = hashlib.sha256(content).hexdigest()
+                    hashes.setdefault(digest, []).append(sc_url)
+                dup_groups = [urls for urls in hashes.values() if len(urls) > 1]
+                if dup_groups:
+                    self.errors.add("metainfo-duplicate-screenshots")
+                    self.info.add(
+                        "metainfo-duplicate-screenshots: The same image is reused for multiple"
+                        + " screenshots/captions: "
+                        + "; ".join(", ".join(group) for group in dup_groups)
+                    )
+                    return
 
         if not skip and not os.path.exists(appstream_path):
             self.errors.add("appstream-missing-appinfo-file")
