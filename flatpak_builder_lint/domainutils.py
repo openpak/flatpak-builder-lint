@@ -112,7 +112,10 @@ def fetch_summary_bytes(url: str) -> bytes:
     # treat the beta repo as empty instead of failing hard.
     if url.startswith(config.FLATHUB_BETA_REPO_URL):
         logger.debug("Beta summary unavailable for %s; treating as empty", url)
-        return GLib.Variant("(a(s(taya{sv}))a{sv})", ([], {})).get_data_as_bytes().get_data()
+        empty = GLib.Variant("(a(s(taya{sv}))a{sv})", ([], {})).get_data_as_bytes().get_data()
+        if empty is None:
+            raise Exception("Failed to construct empty summary bytes")
+        return empty
 
     raise Exception("Failed to load fallback local summary file")
 
@@ -216,6 +219,22 @@ def get_eol_runtimes_on_flathub() -> set[str]:
 
 def get_active_runtimes_on_flathub() -> set[str]:
     return get_all_runtimes_on_flathub() - get_eol_runtimes_on_flathub()
+
+
+@cache
+def fetch_image_bytes(url: str) -> bytes | None:
+    # Download a screenshot/image and return its raw bytes (None on any failure).
+    # Used to detect the same image being reused for multiple screenshots/captions.
+    if not url.startswith(("https://", "http://")):
+        return None
+    try:
+        r = session.get(url, allow_redirects=True, timeout=REQUEST_TIMEOUT)
+        if r.status_code == 200 and r.content:
+            return r.content
+        logger.debug("Image fetch non-200 for %s: %s", url, r.status_code)
+    except requests.exceptions.RequestException as e:
+        logger.debug("Image fetch failed %s: %s: %s", url, type(e).__name__, e)
+    return None
 
 
 @cache
