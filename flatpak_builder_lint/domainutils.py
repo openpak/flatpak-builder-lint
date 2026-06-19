@@ -112,7 +112,10 @@ def fetch_summary_bytes(url: str) -> bytes:
     # treat the beta repo as empty instead of failing hard.
     if url.startswith(config.FLATHUB_BETA_REPO_URL):
         logger.debug("Beta summary unavailable for %s; treating as empty", url)
-        return GLib.Variant("(a(s(taya{sv}))a{sv})", ([], {})).get_data_as_bytes().get_data()
+        empty = GLib.Variant("(a(s(taya{sv}))a{sv})", ([], {})).get_data_as_bytes().get_data()
+        if empty is None:
+            raise Exception("Failed to construct empty summary bytes")
+        return empty
 
     raise Exception("Failed to load fallback local summary file")
 
